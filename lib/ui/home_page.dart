@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildTaskList(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
+
     return StreamBuilder<List<TaskToDo>>(
       stream: database.watchAllTasks(),
       builder: (context, snapshot) {
@@ -62,10 +63,44 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class NewTaskInput extends StatelessWidget {
+class NewTaskInput extends StatefulWidget {
   const NewTaskInput({Key? key}) : super(key: key);
+
+  @override
+  State<NewTaskInput> createState() => _NewTaskInputState();
+}
+
+class _NewTaskInputState extends State<NewTaskInput> {
+  late DateTime _newTaskDate;
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        children: <Widget>[
+          _buildTextField(context),
+          _buildDateButton(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField(BuildContext context) {
+    return TextField();
+  }
+
+  Widget _buildDateButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {},
+      child: Text(''),
+    );
   }
 }
